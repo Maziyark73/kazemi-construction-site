@@ -1,4 +1,114 @@
 @import "tailwindcss";
 
+:root {
+  --logo-black: #070808;
+  --logo-black-soft: #101211;
+  --logo-gold: #d69a2d;
+  --logo-gold-light: #fff0bc;
+  --logo-gold-dark: #704409;
+  --logo-gold-mid: #b87915;
+  --logo-silver: #e7e5dc;
+  --logo-silver-mid: #a9aaa4;
+  --logo-silver-dark: #62635f;
+}
+
 html { scroll-behavior: smooth; }
-body { margin: 0; }
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background: var(--logo-black);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: geometricPrecision;
+}
+
+.gold-metal-bg {
+  background:
+    linear-gradient(135deg, #623908 0%, #b87312 19%, #fff1bf 40%, #d69a2d 55%, #7b4a0a 72%, #f3c966 100%);
+}
+
+.gold-metal-text {
+  background: linear-gradient(180deg, #fff6cf 0%, #e5ad3b 38%, #80500e 61%, #ffd873 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-outline-button {
+  background:
+    linear-gradient(180deg, #111312 0%, #070808 100%) padding-box,
+    linear-gradient(135deg, rgba(255, 240, 188, 0.92), #d69a2d 46%, rgba(112, 68, 9, 0.95) 100%) border-box;
+  border: 1px solid transparent;
+  color: var(--logo-gold-light);
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    inset 0 -1px 0 rgba(214, 154, 45, 0.16);
+}
+
+.gold-outline-button:hover {
+  background:
+    linear-gradient(180deg, #171918 0%, #0a0b0a 100%) padding-box,
+    linear-gradient(135deg, #fff0bc 0%, #d69a2d 48%, #704409 100%) border-box;
+  color: #fff6d8;
+}
+
+.gold-outline-button svg {
+  color: var(--logo-gold-light);
+  filter: drop-shadow(0 1px 3px rgba(214, 154, 45, 0.34));
+}
+
+.gold-outline-medallion {
+  background:
+    linear-gradient(180deg, #111312 0%, #070808 100%) padding-box,
+    linear-gradient(135deg, #fff0bc 0%, #d69a2d 45%, #704409 100%) border-box;
+  border: 1px solid transparent;
+  box-shadow:
+    0 8px 18px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.silver-metal-text {
+  background: linear-gradient(180deg, #ffffff 0%, #bfc0bb 42%, #646560 66%, #f2f0e8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.gold-hairline {
+  background: linear-gradient(90deg, transparent 0%, rgba(255, 240, 188, 0.25) 14%, #d69a2d 50%, rgba(255, 240, 188, 0.25) 86%, transparent 100%);
+}
+
+.luxury-form {
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, rgba(255, 240, 188, 0.9), rgba(182, 116, 18, 0.45), rgba(255, 255, 255, 0.7)) border-box;
+  border: 1px solid transparent;
+}
+
+.luxury-card {
+  position: relative;
+  background:
+    linear-gradient(#ffffff, #ffffff) padding-box,
+    linear-gradient(135deg, rgba(255, 240, 188, 0.55), rgba(214, 154, 45, 0.28), rgba(226, 222, 213, 0.9)) border-box;
+  border: 1px solid transparent;
+}
+
+.luxury-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.74), inset 0 -1px 0 rgba(112, 68, 9, 0.08);
+}
+
+.gold-image-line {
+  background: linear-gradient(90deg, #704409 0%, #f5d37a 48%, #8b550f 100%);
+}
+
+.luxury-dark-panel {
+  background:
+    radial-gradient(circle at 18% 0%, rgba(214, 154, 45, 0.2), transparent 26%),
+    linear-gradient(135deg, #080909 0%, #111513 58%, #070808 100%);
+  border: 1px solid rgba(255, 240, 188, 0.2);
+}
