@@ -1,333 +1,176 @@
-import {
-  ArrowRight,
-  Bath,
-  Building2,
-  ChevronDown,
-  Clock3,
-  Handshake,
-  Home,
-  Mail,
-  Menu,
-  MessageSquare,
-  Phone,
-  ShieldCheck,
-  Trees,
-  User,
-  Users,
-  Wrench,
-} from "lucide-react";
+"use client";
+import { useState } from "react";
+import { createClient } from "@supabase/supabase-js";
+import { Phone, ShieldCheck, Users, Clock3, Handshake, Home, Bath, Hammer, Trees, Building2, ArrowRight, Mail, MapPin, CheckCircle } from "lucide-react";
 
-const logoImage = "/logo.png";
+const supabase = createClient(
+  process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+);
 
-const heroImage =
-  "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=2400&q=90";
+const LOGO = "/logo.png";
 
 const services = [
-  {
-    title: "Kitchen Remodeling",
-    description: "Beautiful, functional kitchens designed for the way you live.",
-    icon: Home,
-    image:
-      "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    title: "Bathroom Remodeling",
-    description: "Modern upgrades that add comfort, value, and style.",
-    icon: Bath,
-    image:
-      "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    title: "Basement Finishing",
-    description: "Maximize your space with quality finishes and smart design.",
-    icon: Building2,
-    image:
-      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    title: "Decks & Outdoor Spaces",
-    description: "Custom outdoor spaces for relaxation and entertainment.",
-    icon: Trees,
-    image:
-      "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=900&q=80",
-  },
-  {
-    title: "Additions & Renovations",
-    description: "Seamless additions and renovations to fit your needs.",
-    icon: Home,
-    image:
-      "https://images.unsplash.com/photo-1605276374104-dee2a0ed3cd6?auto=format&fit=crop&w=900&q=80",
-  },
+  { title: "Kitchen Remodeling", description: "Beautiful, functional kitchens designed for the way you live.", icon: Home, image: "https://images.unsplash.com/photo-1556911220-bff31c812dba?auto=format&fit=crop&w=900&q=80" },
+  { title: "Bathroom Remodeling", description: "Modern upgrades that add comfort, value, and style.", icon: Bath, image: "https://images.unsplash.com/photo-1620626011761-996317b8d101?auto=format&fit=crop&w=900&q=80" },
+  { title: "Basement Finishing", description: "Maximize your space with quality finishes and smart design.", icon: Building2, image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=80" },
+  { title: "Decks & Outdoor Spaces", description: "Custom outdoor spaces for relaxing, hosting, and family time.", icon: Trees, image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=80" },
+  { title: "Additions & Renovations", description: "Seamless additions and renovations built around your needs.", icon: Hammer, image: "https://images.unsplash.com/photo-1600566752355-35792bedcfea?auto=format&fit=crop&w=900&q=80" },
 ];
 
 const trustItems = [
-  {
-    title: "Licensed & Insured",
-    text: "Fully licensed and insured for your peace of mind.",
-    icon: ShieldCheck,
-  },
-  {
-    title: "Quality Craftsmanship",
-    text: "We take pride in delivering high-quality work.",
-    icon: Users,
-  },
-  {
-    title: "On Time. On Budget.",
-    text: "We respect your time and your investment.",
-    icon: Clock3,
-  },
-  {
-    title: "Customer Focused",
-    text: "Your satisfaction is our top priority.",
-    icon: Handshake,
-  },
+  { title: "Licensed & Insured", text: "Fully licensed and insured for your peace of mind.", icon: ShieldCheck },
+  { title: "Quality Craftsmanship", text: "We take pride in delivering high-quality work.", icon: Users },
+  { title: "On Time. On Budget.", text: "We respect your time and your investment.", icon: Clock3 },
+  { title: "Customer Focused", text: "Your satisfaction is our top priority.", icon: Handshake },
 ];
-
-const projects = [
-  {
-    title: "Whole Home Renovation",
-    image:
-      "https://images.unsplash.com/photo-1600566753151-384129cf4e3e?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    title: "Custom Kitchen Remodel",
-    image:
-      "https://images.unsplash.com/photo-1600489000022-c2086d79f9d4?auto=format&fit=crop&w=1000&q=80",
-  },
-  {
-    title: "Outdoor Living Build",
-    image:
-      "https://images.unsplash.com/photo-1600607687644-c7171b42498f?auto=format&fit=crop&w=1000&q=80",
-  },
-];
-
-const navItems = [
-  { label: "Home", href: "#home" },
-  { label: "About Us", href: "#home" },
-  { label: "Services", href: "#services" },
-  { label: "Projects", href: "#projects" },
-  { label: "Reviews", href: "#projects" },
-  { label: "Contact", href: "#estimate" },
-];
-
-function LogoMark() {
-  return (
-    <a
-      aria-label="Kazemi Construction LLC home"
-      className="flex h-[170px] w-[245px] shrink-0 items-center md:h-[210px] md:w-[390px]"
-      href="#home"
-    >
-      <img
-        alt="Kazemi Construction LLC"
-        className="h-full w-full object-contain object-left drop-shadow-[0_9px_18px_rgba(0,0,0,0.82)]"
-        src={logoImage}
-      />
-    </a>
-  );
-}
-
-function Field({
-  as = "input",
-  icon: Icon,
-  placeholder,
-}: {
-  as?: "input" | "textarea" | "select";
-  icon: typeof User;
-  placeholder: string;
-}) {
-  if (as === "textarea") {
-    return (
-      <label className="relative block">
-        <MessageSquare className="pointer-events-none absolute left-[13px] top-[13px] h-[15px] w-[15px] text-[var(--logo-gold-mid)]" />
-        <textarea
-          aria-label={placeholder}
-          className="h-[85px] w-full resize-none rounded-[3px] border border-[#d3d3d3] bg-white py-[12px] pl-[38px] pr-3 text-[13px] leading-5 text-[#2c2c2c] outline-none placeholder:text-[#838383] focus:border-[var(--logo-gold)] focus:ring-2 focus:ring-[rgba(214,154,45,0.16)]"
-          placeholder={placeholder}
-        />
-      </label>
-    );
-  }
-
-  if (as === "select") {
-    return (
-      <label className="relative block">
-        <Icon className="pointer-events-none absolute left-[13px] top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[var(--logo-gold-mid)]" />
-        <select
-          aria-label={placeholder}
-          className="h-[42px] w-full appearance-none rounded-[3px] border border-[#d3d3d3] bg-white pl-[38px] pr-10 text-[13px] text-[#777] outline-none focus:border-[var(--logo-gold)] focus:ring-2 focus:ring-[rgba(214,154,45,0.16)]"
-          defaultValue=""
-        >
-          <option disabled value="">
-            {placeholder}
-          </option>
-          <option>Kitchen Remodeling</option>
-          <option>Bathroom Remodeling</option>
-          <option>Basement Finishing</option>
-          <option>Decks & Outdoor Spaces</option>
-          <option>Additions & Renovations</option>
-        </select>
-        <ChevronDown className="pointer-events-none absolute right-[13px] top-1/2 h-[16px] w-[16px] -translate-y-1/2 text-[var(--logo-gold-dark)]" />
-      </label>
-    );
-  }
-
-  return (
-    <label className="relative block">
-      <Icon className="pointer-events-none absolute left-[13px] top-1/2 h-[15px] w-[15px] -translate-y-1/2 text-[var(--logo-gold-mid)]" />
-      <input
-        aria-label={placeholder}
-        className="h-[42px] w-full rounded-[3px] border border-[#d3d3d3] bg-white pl-[38px] pr-3 text-[13px] text-[#2c2c2c] outline-none placeholder:text-[#838383] focus:border-[var(--logo-gold)] focus:ring-2 focus:ring-[rgba(214,154,45,0.16)]"
-        placeholder={placeholder}
-      />
-    </label>
-  );
-}
 
 function EstimateForm() {
+  const [form, setForm] = useState({ full_name: "", phone: "", email: "", project_type: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+
+  const submit = async () => {
+    if (!form.full_name) return;
+    setLoading(true);
+    await supabase.schema("kazemi").from("leads").insert({
+      ...form,
+      source: "estimate_form",
+    });
+    setLoading(false);
+    setDone(true);
+  };
+
+  if (done) return (
+    <div className="flex flex-col items-center justify-center gap-4 py-10 text-center">
+      <CheckCircle className="h-12 w-12 text-amber-500" />
+      <h3 className="text-xl font-black uppercase">Request Received!</h3>
+      <p className="text-sm text-neutral-500">We&apos;ll be in touch within 24 hours.</p>
+    </div>
+  );
+
   return (
-    <aside
-      id="estimate"
-      className="luxury-form w-full max-w-[389px] self-end rounded-[10px] px-[30px] pb-[30px] pt-[29px] text-[#171717] shadow-[0_22px_58px_rgba(0,0,0,0.34)] lg:mb-[11px]"
-    >
-      <h2 className="text-center text-[21px] font-black uppercase leading-none tracking-[0.045em]">
-        Get a Free Estimate
-      </h2>
-      <div className="gold-metal-bg mx-auto mb-[21px] mt-[15px] h-[3px] w-[36px]" />
-      <form className="space-y-[11px]">
-        <Field icon={User} placeholder="Full Name" />
-        <Field icon={Phone} placeholder="Phone Number" />
-        <Field icon={Mail} placeholder="Email Address" />
-        <Field as="select" icon={Wrench} placeholder="Project Type" />
-        <Field as="textarea" icon={MessageSquare} placeholder="Tell us about your project" />
-        <button
-          className="gold-outline-button flex h-[45px] w-full items-center justify-center gap-[10px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.08em] transition"
-          type="button"
-        >
-          Submit Request
-          <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} />
-        </button>
-      </form>
-    </aside>
+    <div className="space-y-4">
+      <input className="w-full rounded-md border border-neutral-300 px-4 py-3 outline-none focus:border-amber-500" placeholder="Full Name *" value={form.full_name} onChange={e => setForm(f => ({ ...f, full_name: e.target.value }))} />
+      <input className="w-full rounded-md border border-neutral-300 px-4 py-3 outline-none focus:border-amber-500" placeholder="Phone Number" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+      <input className="w-full rounded-md border border-neutral-300 px-4 py-3 outline-none focus:border-amber-500" placeholder="Email Address" value={form.email} onChange={e => setForm(f => ({ ...f, email: e.target.value }))} />
+      <select className="w-full rounded-md border border-neutral-300 px-4 py-3 text-neutral-500 outline-none focus:border-amber-500" value={form.project_type} onChange={e => setForm(f => ({ ...f, project_type: e.target.value }))}>
+        <option value="">Project Type</option>
+        <option>Kitchen Remodeling</option>
+        <option>Bathroom Remodeling</option>
+        <option>Deck or Outdoor Space</option>
+        <option>Addition or Renovation</option>
+        <option>Basement Finishing</option>
+        <option>Other General Contracting</option>
+      </select>
+      <textarea className="h-28 w-full rounded-md border border-neutral-300 px-4 py-3 outline-none focus:border-amber-500" placeholder="Tell us about your project" value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
+      <button type="button" onClick={submit} disabled={loading} className="w-full rounded-md bg-gradient-to-r from-amber-500 to-yellow-600 px-6 py-4 text-sm font-black uppercase tracking-wide text-white disabled:opacity-60">
+        {loading ? "Sending..." : "Submit Request"}
+      </button>
+    </div>
+  );
+}
+
+function CallbackForm() {
+  const [form, setForm] = useState({ full_name: "", phone: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+
+  const submit = async () => {
+    if (!form.full_name) return;
+    setLoading(true);
+    await supabase.schema("kazemi").from("leads").insert({
+      full_name: form.full_name,
+      phone: form.phone,
+      message: form.message,
+      source: "callback_form",
+    });
+    setLoading(false);
+    setDone(true);
+  };
+
+  if (done) return (
+    <div className="flex flex-col items-center justify-center gap-4 py-10 text-center text-white">
+      <CheckCircle className="h-12 w-12 text-amber-400" />
+      <h3 className="text-xl font-black uppercase">Got it!</h3>
+      <p className="text-sm text-neutral-300">We&apos;ll call you back soon.</p>
+    </div>
+  );
+
+  return (
+    <div className="space-y-4">
+      <input className="w-full rounded-md border border-white/10 bg-white/10 px-4 py-3 outline-none placeholder:text-neutral-400 focus:border-amber-500" placeholder="Your Name *" value={form.full_name} onChange={e => setForm(f => ({ ...f, full_name: e.target.value }))} />
+      <input className="w-full rounded-md border border-white/10 bg-white/10 px-4 py-3 outline-none placeholder:text-neutral-400 focus:border-amber-500" placeholder="Phone Number" value={form.phone} onChange={e => setForm(f => ({ ...f, phone: e.target.value }))} />
+      <textarea className="h-28 w-full rounded-md border border-white/10 bg-white/10 px-4 py-3 outline-none placeholder:text-neutral-400 focus:border-amber-500" placeholder="What do you need done?" value={form.message} onChange={e => setForm(f => ({ ...f, message: e.target.value }))} />
+      <button type="button" onClick={submit} disabled={loading} className="w-full rounded-md bg-gradient-to-r from-amber-500 to-yellow-600 px-6 py-4 text-sm font-black uppercase tracking-wide text-white disabled:opacity-60">
+        {loading ? "Sending..." : "Send Request"}
+      </button>
+    </div>
   );
 }
 
 export default function Page() {
   return (
-    <div className="min-h-screen bg-[var(--logo-black)] text-white">
-      <header className="relative z-30 border-b border-white/10 bg-[var(--logo-black)] shadow-[0_14px_34px_rgba(0,0,0,0.38)]">
-        <div className="mx-auto flex h-[190px] max-w-[1760px] items-center justify-between px-5 md:h-[232px] 2xl:px-8">
-          <LogoMark />
-
-          <nav className="ml-[54px] hidden h-full items-center gap-[36px] text-[12px] font-black uppercase tracking-[0.055em] xl:flex 2xl:ml-[70px] 2xl:gap-[44px]">
-            {navItems.map((item) => (
-              <a
-                className={`relative flex h-full items-center transition hover:text-[var(--logo-gold)] ${
-                  item.label === "Home" ? "text-[var(--logo-gold)] after:absolute after:bottom-[56px] after:left-1/2 after:h-[2px] after:w-[41px] after:-translate-x-1/2 after:bg-[var(--logo-gold)]" : "text-white"
-                }`}
-                href={item.href}
-                key={item.label}
-              >
-                {item.label}
-              </a>
-            ))}
+    <div className="min-h-screen bg-neutral-950 text-white">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-black/90 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-3">
+          <div className="flex items-center">
+            <img src={LOGO} alt="Kazemi Construction LLC" className="h-16 w-auto" />
+          </div>
+          <nav className="hidden items-center gap-8 text-sm font-semibold uppercase tracking-wide md:flex">
+            <a className="text-amber-400 border-b-2 border-amber-400 pb-1" href="#home">Home</a>
+            <a className="hover:text-amber-400 transition-colors" href="#about">About Us</a>
+            <a className="hover:text-amber-400 transition-colors" href="#services">Services</a>
+            <a className="hover:text-amber-400 transition-colors" href="#projects">Projects</a>
+            <a className="hover:text-amber-400 transition-colors" href="#reviews">Reviews</a>
+            <a className="hover:text-amber-400 transition-colors" href="#contact">Contact</a>
           </nav>
-
-          <div className="ml-auto hidden items-center gap-[26px] 2xl:flex">
-            <a className="flex items-center gap-[13px] text-[17px] font-bold tracking-[0.02em]" href="tel:+17037325447">
-              <Phone className="h-[18px] w-[18px] text-[var(--logo-gold)]" strokeWidth={3} />
+          <div className="hidden items-center gap-5 lg:flex">
+            <a className="flex items-center gap-2 font-semibold" href="tel:+17037325447">
+              <Phone className="h-5 w-5 text-amber-400" />
               <span>(703) 732-5447</span>
             </a>
-            <a
-              className="gold-outline-button flex h-[48px] w-[235px] items-center justify-center gap-[10px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.085em] transition"
-              href="#estimate"
-            >
-              Get a Free Estimate
-              <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} />
-            </a>
+            <a href="#estimate" className="rounded-md bg-gradient-to-r from-amber-500 to-yellow-600 px-7 py-3 text-sm font-bold uppercase tracking-wide text-white shadow-lg transition hover:opacity-90">Get a Free Estimate</a>
           </div>
-
-          <a className="ml-auto hidden items-center gap-2 text-sm font-bold text-white md:flex 2xl:hidden" href="tel:+17037325447">
-            <Phone className="h-4 w-4 text-[var(--logo-gold)]" />
-            <span>(703) 732-5447</span>
-          </a>
-          <button className="ml-4 grid h-10 w-10 place-items-center rounded-[3px] border border-white/20 xl:hidden" type="button" aria-label="Open menu">
-            <Menu className="h-5 w-5" />
-          </button>
         </div>
-        <span className="gold-hairline pointer-events-none absolute inset-x-0 bottom-0 h-px" />
       </header>
 
       <main id="home">
-        <section className="relative min-h-[585px] overflow-hidden">
+        <section className="relative overflow-hidden">
           <div className="absolute inset-0">
-            <img
-              alt="Luxury custom home exterior at dusk"
-              className="h-full w-full object-cover object-[58%_50%]"
-              src={heroImage}
-            />
-            <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.97)_0%,rgba(0,0,0,0.88)_20%,rgba(0,0,0,0.56)_43%,rgba(0,0,0,0.18)_69%,rgba(0,0,0,0.24)_100%)]" />
-            <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0)_48%,rgba(0,0,0,0.58)_100%)]" />
-            <div className="absolute inset-x-0 top-0 h-[2px] bg-[linear-gradient(90deg,transparent,rgba(255,240,188,0.34),transparent)]" />
+            <img className="h-full w-full object-cover" src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&w=2400&q=90" alt="Luxury home exterior" />
+            <div className="absolute inset-0 bg-gradient-to-r from-black via-black/75 to-black/20" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30" />
           </div>
-
-          <div className="relative mx-auto grid min-h-[585px] max-w-[1584px] items-center gap-10 px-5 py-10 lg:grid-cols-[minmax(0,1fr)_389px] lg:py-0 2xl:px-0">
-            <div className="max-w-[610px] pt-1">
-              <p className="gold-metal-text mb-[19px] text-[20px] font-black uppercase leading-none tracking-[0.19em]">
-                Built on Trust.
-              </p>
-              <h1 className="text-[49px] font-black uppercase leading-[1.02] tracking-[0.025em] text-white sm:text-[64px] xl:text-[74px]">
-                Built for
-                <br />
-                Generations.
-              </h1>
-              <div className="gold-metal-bg mb-[17px] mt-[20px] h-[3px] w-[73px]" />
-              <p className="mb-[36px] max-w-[590px] text-[18px] font-medium leading-[1.78] text-white md:text-[20px]">
-                Kazemi Construction LLC is a full-service general contractor delivering quality craftsmanship and
-                reliable solutions for your home or business.
-              </p>
-              <div className="flex flex-col gap-[29px] sm:flex-row">
-                <a
-                  className="gold-outline-button flex h-[48px] w-full items-center justify-center gap-[12px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.075em] transition sm:w-[182px]"
-                  href="#services"
-                >
-                  Our Services
-                  <ArrowRight className="h-[15px] w-[15px]" strokeWidth={3} />
-                </a>
-                <a
-                  className="gold-outline-button flex h-[48px] w-full items-center justify-center gap-[10px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.075em] transition sm:w-[212px]"
-                  href="#estimate"
-                >
-                  Get a Free Estimate
-                  <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} />
-                </a>
+          <div className="relative mx-auto grid min-h-[700px] max-w-7xl items-center gap-12 px-6 py-20 lg:grid-cols-[1fr_420px]">
+            <div className="max-w-2xl">
+              <p className="mb-4 text-base font-bold uppercase tracking-[0.22em] text-amber-400">Built on Trust.</p>
+              <h1 className="mb-5 text-5xl font-black uppercase leading-[0.95] tracking-tight md:text-7xl">Built for <br /> Generations.</h1>
+              <div className="mb-5 h-1 w-20 bg-amber-500" />
+              <p className="mb-9 max-w-xl text-lg leading-8 text-neutral-100">Kazemi Construction LLC is a full-service general contractor delivering quality craftsmanship and reliable solutions for your home or business.</p>
+              <div className="flex flex-col gap-4 sm:flex-row">
+                <a href="#services" className="inline-flex items-center justify-center gap-2 rounded-md bg-gradient-to-r from-amber-500 to-yellow-600 px-8 py-4 text-sm font-bold uppercase tracking-wide text-white shadow-xl">Our Services <ArrowRight className="h-4 w-4" /></a>
+                <a href="#estimate" className="inline-flex items-center justify-center rounded-md border border-amber-500/70 px-8 py-4 text-sm font-bold uppercase tracking-wide text-white transition hover:bg-amber-500/10">Get a Free Estimate</a>
               </div>
             </div>
-
-            <EstimateForm />
+            <div id="estimate" className="rounded-2xl bg-white p-7 text-neutral-900 shadow-2xl">
+              <h2 className="mb-2 text-center text-2xl font-black uppercase">Get a Free Estimate</h2>
+              <div className="mx-auto mb-6 h-1 w-16 bg-amber-500" />
+              <EstimateForm />
+            </div>
           </div>
         </section>
 
-        <section className="min-h-[118px] border-y border-white/5 bg-[linear-gradient(90deg,#080909_0%,#171816_48%,#0a0b0a_100%)] shadow-[inset_0_1px_0_rgba(255,240,188,0.08)]">
-          <div className="mx-auto grid min-h-[118px] max-w-[1584px] gap-y-6 px-5 py-[23px] md:grid-cols-2 lg:grid-cols-4 lg:py-0 2xl:px-0">
+        <section className="border-y border-white/10 bg-neutral-900">
+          <div className="mx-auto grid max-w-7xl gap-0 px-6 py-8 md:grid-cols-2 lg:grid-cols-4">
             {trustItems.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div
-                  className={`flex items-center gap-[27px] ${
-                    index === 0 ? "" : "lg:border-l lg:border-white/10 lg:pl-[57px]"
-                  }`}
-                  key={item.title}
-                >
-                  <div className="gold-metal-bg grid h-[54px] w-[54px] shrink-0 place-items-center rounded-full p-px shadow-[0_8px_18px_rgba(0,0,0,0.28)]">
-                    <div className="grid h-full w-full place-items-center rounded-full bg-[#101211]">
-                      <Icon className="h-[30px] w-[30px] text-[var(--logo-gold-light)]" strokeWidth={1.75} />
-                    </div>
-                  </div>
-                  <div className="max-w-[245px]">
-                    <h3 className="mb-[7px] text-[14px] font-black uppercase leading-none tracking-[0.055em]">
-                      {item.title}
-                    </h3>
-                    <p className="text-[14px] font-medium leading-[1.55] text-white">{item.text}</p>
+                <div key={item.title} className={`flex gap-5 py-5 ${index !== 0 ? "lg:border-l lg:border-white/10 lg:pl-10" : ""}`}>
+                  <Icon className="mt-1 h-9 w-9 shrink-0 text-amber-400" />
+                  <div>
+                    <h3 className="mb-2 text-sm font-black uppercase tracking-wide">{item.title}</h3>
+                    <p className="text-sm leading-6 text-neutral-300">{item.text}</p>
                   </div>
                 </div>
               );
@@ -335,91 +178,73 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="services" className="bg-[#f8f7f2] pb-[12px] pt-[22px] text-[#151515]">
-          <div className="mx-auto max-w-[1584px] px-5 2xl:px-0">
-            <div className="text-center">
-              <h2 className="text-[26px] font-black uppercase leading-none tracking-[0.07em] md:text-[28px]">
-                Our Services
-              </h2>
-              <div className="gold-metal-bg mx-auto mt-[12px] h-[3px] w-[35px]" />
+        <section id="services" className="bg-stone-100 px-6 py-16 text-neutral-950">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-10 text-center">
+              <h2 className="text-3xl font-black uppercase tracking-wide md:text-4xl">Our Services</h2>
+              <div className="mx-auto mt-4 h-1 w-16 bg-amber-500" />
             </div>
-
-            <div className="mt-[22px] grid gap-[25px] md:grid-cols-2 lg:grid-cols-5">
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <article
-                    className="luxury-card group min-h-[250px] overflow-hidden rounded-[4px] shadow-[0_7px_18px_rgba(19,18,15,0.09)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(19,18,15,0.14)]"
-                    key={service.title}
-                  >
-                    <div className="relative h-[141px]">
-                      <img alt={service.title} className="h-full w-full object-cover" src={service.image} />
-                      <div className="gold-image-line absolute inset-x-0 bottom-0 h-[3px]" />
-                      <div className="gold-outline-medallion absolute -bottom-[29px] left-[25px] grid h-[58px] w-[58px] place-items-center rounded-full">
-                        <Icon className="h-[29px] w-[29px] text-[var(--logo-gold-light)]" strokeWidth={1.9} />
+                  <article key={service.title} className="overflow-hidden rounded-xl bg-white shadow-md transition hover:-translate-y-1 hover:shadow-xl">
+                    <div className="relative h-40">
+                      <img className="h-full w-full object-cover" src={service.image} alt={service.title} />
+                      <div className="absolute -bottom-7 left-6 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-br from-amber-500 to-yellow-600 shadow-lg">
+                        <Icon className="h-7 w-7 text-white" />
                       </div>
                     </div>
-                    <div className="px-[20px] pb-[18px] pt-[35px] text-center">
-                      <h3 className="mb-[12px] text-[14px] font-black uppercase leading-none tracking-[0.015em]">
-                        {service.title}
-                      </h3>
-                      <p className="mx-auto max-w-[230px] text-[13px] font-medium leading-[1.65] text-[#202020]">
-                        {service.description}
-                      </p>
+                    <div className="px-5 pb-6 pt-10 text-center">
+                      <h3 className="mb-3 text-sm font-black uppercase tracking-wide">{service.title}</h3>
+                      <p className="text-sm leading-6 text-neutral-600">{service.description}</p>
                     </div>
                   </article>
                 );
               })}
             </div>
-
-            <div className="mt-[17px] text-center">
-              <a
-                className="gold-outline-button inline-flex h-[38px] w-full max-w-[260px] items-center justify-center gap-[10px] rounded-[2px] text-[12px] font-black uppercase tracking-[0.12em] transition"
-                href="#services"
-              >
-                View All Services
-                <ArrowRight className="h-[13px] w-[13px]" strokeWidth={3} />
-              </a>
+            <div className="mt-8 text-center">
+              <a href="#contact" className="inline-flex items-center justify-center rounded-md border border-amber-600 px-12 py-3 text-sm font-bold uppercase tracking-wide text-amber-700 transition hover:bg-amber-50">View All Services</a>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="bg-[#f8f7f2] pb-16 text-white">
-          <div className="mx-auto max-w-[1584px] px-5 2xl:px-0">
-            <div className="luxury-dark-panel relative min-h-[430px] overflow-hidden rounded-[4px] px-[34px] pb-[34px] pt-[28px] shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
-              <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:58px_58px]" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_23%_12%,rgba(255,255,255,0.12),transparent_24%),linear-gradient(90deg,rgba(0,0,0,0.1),rgba(0,0,0,0.72))]" />
-
-              <div className="relative mb-[26px] flex items-center justify-between gap-6">
-                <div>
-                  <h2 className="text-[28px] font-black uppercase leading-none tracking-[0.07em]">Recent Projects</h2>
-                  <div className="gold-metal-bg mt-[15px] h-[3px] w-[55px]" />
+        <section id="projects" className="bg-neutral-950 px-6 py-16">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-8 flex items-center justify-between gap-4">
+              <div>
+                <h2 className="text-3xl font-black uppercase tracking-wide">Recent Projects</h2>
+                <div className="mt-3 h-1 w-16 bg-amber-500" />
+              </div>
+              <a href="#contact" className="hidden items-center gap-2 text-sm font-bold uppercase tracking-wide text-amber-400 md:inline-flex">View All Projects <ArrowRight className="h-4 w-4" /></a>
+            </div>
+            <div className="grid gap-6 md:grid-cols-3">
+              {["Kitchen Upgrade", "Outdoor Deck", "Home Renovation"].map((title, i) => (
+                <div key={title} className="rounded-xl border border-white/10 bg-white/5 p-5">
+                  <div className="mb-4 h-48 rounded-lg bg-neutral-800 bg-cover bg-center" style={{ backgroundImage: `url(${services[i].image})` }} />
+                  <h3 className="mb-2 text-xl font-bold">{title}</h3>
+                  <p className="text-sm leading-6 text-neutral-300">Clean craftsmanship, reliable timeline, and a finished result built to last.</p>
                 </div>
-                <a
-                  className="hidden items-center gap-[13px] text-[12px] font-black uppercase tracking-[0.12em] text-[var(--logo-gold)] md:flex"
-                  href="#projects"
-                >
-                  View All Projects
-                  <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} />
-                </a>
-              </div>
+              ))}
+            </div>
+          </div>
+        </section>
 
-              <div className="relative grid gap-[24px] md:grid-cols-3">
-                {projects.map((project) => (
-                  <article className="overflow-hidden rounded-[4px] bg-white/8 shadow-[0_12px_26px_rgba(0,0,0,0.18)] ring-1 ring-[rgba(255,240,188,0.18)]" key={project.title}>
-                    <div className="relative">
-                      <img alt={project.title} className="h-[195px] w-full object-cover" src={project.image} />
-                      <div className="gold-image-line absolute inset-x-0 bottom-0 h-[3px]" />
-                    </div>
-                    <div className="px-5 py-4">
-                      <h3 className="text-[17px] font-black uppercase tracking-[0.045em]">{project.title}</h3>
-                      <p className="mt-2 text-[13px] leading-6 text-white/75">
-                        Premium materials, clean detailing, and reliable project management.
-                      </p>
-                    </div>
-                  </article>
-                ))}
+        <section id="contact" className="bg-white px-6 py-16 text-neutral-950">
+          <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-2">
+            <div>
+              <p className="mb-3 text-sm font-black uppercase tracking-[0.25em] text-amber-600">Ready to Build?</p>
+              <h2 className="mb-5 text-4xl font-black leading-tight">Get a reliable contractor for your next project.</h2>
+              <p className="mb-8 text-lg leading-8 text-neutral-600">Whether it&apos;s a remodel, repair, addition, or full renovation, Kazemi Construction LLC is ready to help you plan it clearly and build it properly.</p>
+              <div className="space-y-4 text-neutral-700">
+                <div className="flex items-center gap-3"><Phone className="h-5 w-5 text-amber-600" /> (703) 732-5447</div>
+                <div className="flex items-center gap-3"><Mail className="h-5 w-5 text-amber-600" /> info@kazemiconstruction.com</div>
+                <div className="flex items-center gap-3"><MapPin className="h-5 w-5 text-amber-600" /> Serving homeowners and businesses</div>
               </div>
+            </div>
+            <div className="rounded-2xl bg-neutral-950 p-8 text-white shadow-2xl">
+              <h3 className="mb-6 text-2xl font-black uppercase">Request a Callback</h3>
+              <CallbackForm />
             </div>
           </div>
         </section>
