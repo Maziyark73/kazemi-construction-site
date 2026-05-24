@@ -118,7 +118,7 @@ const navItems = [
   { label: "Services", href: "#services" },
   { label: "Projects", href: "#projects" },
   { label: "Reviews", href: "#projects" },
-  { label: "Contact", href: "#estimate" },
+  { label: "Contact", href: "#contact" },
 ];
 
 type EstimateState = {
@@ -126,6 +126,12 @@ type EstimateState = {
   phone: string;
   email: string;
   project_type: string;
+  message: string;
+};
+
+type CallbackState = {
+  full_name: string;
+  phone: string;
   message: string;
 };
 
@@ -276,6 +282,77 @@ function EstimateForm() {
         type="button"
       >
         {loading ? "Sending..." : "Submit Request"}
+        {!loading ? <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} /> : null}
+      </button>
+    </form>
+  );
+}
+
+function CallbackForm() {
+  const [form, setForm] = useState<CallbackState>({
+    full_name: "",
+    phone: "",
+    message: "",
+  });
+  const [loading, setLoading] = useState(false);
+  const [done, setDone] = useState(false);
+  const [error, setError] = useState("");
+
+  const update = (field: keyof CallbackState) => (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    setForm((current) => ({ ...current, [field]: event.target.value }));
+  };
+
+  const submit = async () => {
+    if (!form.full_name.trim()) {
+      setError("Please enter your name.");
+      return;
+    }
+
+    setLoading(true);
+    setError("");
+
+    const { error: insertError } = await supabase.schema("kazemi").from("leads").insert({
+      full_name: form.full_name,
+      phone: form.phone,
+      message: form.message,
+      source: "callback_form",
+    });
+
+    setLoading(false);
+
+    if (insertError) {
+      setError("Something went wrong. Please call us directly.");
+      return;
+    }
+
+    setDone(true);
+  };
+
+  if (done) {
+    return (
+      <div className="flex min-h-[227px] flex-col items-center justify-center gap-4 text-center text-white">
+        <CheckCircle className="h-12 w-12 text-[var(--logo-gold)]" />
+        <h3 className="text-xl font-black uppercase tracking-[0.045em]">Request Received</h3>
+        <p className="max-w-[260px] text-sm leading-6 text-white/70">We&apos;ll call you back soon.</p>
+      </div>
+    );
+  }
+
+  return (
+    <form className="space-y-[11px]">
+      <Field icon={User} onChange={update("full_name")} placeholder="Full Name" value={form.full_name} />
+      <Field icon={Phone} onChange={update("phone")} placeholder="Phone Number" value={form.phone} />
+      <Field as="textarea" icon={MessageSquare} onChange={update("message")} placeholder="What do you need done?" value={form.message} />
+      {error ? <p className="text-center text-xs font-semibold text-red-200">{error}</p> : null}
+      <button
+        className="gold-outline-button flex h-[45px] w-full items-center justify-center gap-[10px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.08em] transition disabled:cursor-not-allowed disabled:opacity-60"
+        disabled={loading}
+        onClick={submit}
+        type="button"
+      >
+        {loading ? "Sending..." : "Request Callback"}
         {!loading ? <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} /> : null}
       </button>
     </form>
@@ -503,6 +580,41 @@ export default function Page() {
                   </article>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="contact" className="bg-[var(--logo-black)] px-5 py-16 text-white 2xl:px-0">
+          <div className="luxury-dark-panel relative mx-auto grid max-w-[1584px] gap-10 overflow-hidden rounded-[4px] px-[34px] py-[34px] shadow-[0_18px_40px_rgba(0,0,0,0.2)] md:grid-cols-[minmax(0,1fr)_420px]">
+            <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:58px_58px]" />
+            <div className="relative">
+              <p className="gold-metal-text mb-[13px] text-[15px] font-black uppercase leading-none tracking-[0.19em]">
+                Ready to Build?
+              </p>
+              <h2 className="text-[28px] font-black uppercase leading-[1.12] tracking-[0.07em] md:text-[36px]">
+                Contact Kazemi Construction
+              </h2>
+              <div className="gold-metal-bg mb-[23px] mt-[15px] h-[3px] w-[55px]" />
+              <p className="max-w-[620px] text-[16px] font-medium leading-[1.8] text-white/78 md:text-[18px]">
+                Tell us what you need built, remodeled, or repaired. We&apos;ll review the project details and follow up with a clear next step.
+              </p>
+              <div className="mt-8 grid gap-4 text-[15px] font-bold tracking-[0.02em] text-white md:grid-cols-2">
+                <a className="gold-outline-button flex h-[52px] items-center gap-[13px] rounded-[3px] px-5 transition" href="tel:+17037325447">
+                  <Phone className="h-[18px] w-[18px]" strokeWidth={3} />
+                  <span>(703) 732-5447</span>
+                </a>
+                <a className="gold-outline-button flex h-[52px] items-center gap-[13px] rounded-[3px] px-5 transition" href="mailto:info@kazemiconstructionllc.com">
+                  <Mail className="h-[18px] w-[18px]" strokeWidth={3} />
+                  <span>info@kazemiconstructionllc.com</span>
+                </a>
+              </div>
+            </div>
+
+            <div className="relative rounded-[4px] border border-[rgba(255,240,188,0.18)] bg-white/8 p-6 shadow-[0_12px_26px_rgba(0,0,0,0.18)]">
+              <h3 className="mb-5 text-[21px] font-black uppercase leading-none tracking-[0.045em]">
+                Request a Callback
+              </h3>
+              <CallbackForm />
             </div>
           </div>
         </section>
