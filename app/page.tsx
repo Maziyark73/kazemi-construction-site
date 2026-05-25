@@ -3,8 +3,8 @@ import { useState, type ChangeEvent } from "react";
 import { createClient } from "@supabase/supabase-js";
 import {
   ArrowRight, Bath, Building2, CheckCircle, ChevronDown, Clock3,
-  Handshake, Home, Mail, Menu, MessageSquare, Phone, ShieldCheck,
-  Trees, User, Users, Wrench, X, type LucideIcon,
+  Handshake, Home, Mail, MessageSquare, Phone, ShieldCheck,
+  Trees, User, Users, Wrench, type LucideIcon,
 } from "lucide-react";
 
 const supabase = createClient(
@@ -47,14 +47,6 @@ const navItems = [
 
 type EstimateState = { full_name: string; phone: string; email: string; project_type: string; message: string; };
 type CallbackState = { full_name: string; phone: string; message: string; };
-
-function LogoMark() {
-  return (
-    <a aria-label="Kazemi Construction LLC home" className="flex h-[170px] w-[245px] shrink-0 items-center md:h-[210px] md:w-[390px]" href="#home">
-      <img alt="Kazemi Construction LLC" className="h-full w-full object-contain object-left drop-shadow-[0_9px_18px_rgba(0,0,0,0.82)]" src={logoImage} />
-    </a>
-  );
-}
 
 function Field({ as = "input", icon: Icon, placeholder, value, onChange }: {
   as?: "input" | "textarea" | "select"; icon: LucideIcon; placeholder: string; value: string;
@@ -161,60 +153,37 @@ function CallbackForm() {
 }
 
 export default function Page() {
-  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <div className="min-h-screen bg-[var(--logo-black)] text-white">
+    <div style={{ minWidth: "1100px" }} className="bg-[var(--logo-black)] text-white">
       <header className="relative z-30 border-b border-white/10 bg-[var(--logo-black)] shadow-[0_14px_34px_rgba(0,0,0,0.38)]">
-        <div className="mx-auto flex h-[190px] max-w-[1760px] items-center justify-between px-5 md:h-[232px] 2xl:px-8">
-          <LogoMark />
+        <div className="flex h-[190px] items-center justify-between px-10">
+          {/* Logo */}
+          <a href="#home" className="flex h-[160px] w-[230px] shrink-0 items-center">
+            <img alt="Kazemi Construction LLC" className="h-full w-full object-contain object-left drop-shadow-[0_9px_18px_rgba(0,0,0,0.82)]" src={logoImage} />
+          </a>
 
-          {/* Desktop nav — visible md+ */}
-          <nav className="ml-8 hidden h-full items-center gap-[28px] text-[12px] font-black uppercase tracking-[0.055em] md:flex 2xl:ml-[70px] 2xl:gap-[44px]">
+          {/* Nav — always visible, never collapses */}
+          <nav className="flex h-full items-center gap-[36px] text-[12px] font-black uppercase tracking-[0.055em]">
             {navItems.map((item) => (
               <a
-                className={`relative flex h-full items-center transition hover:text-[var(--logo-gold)] ${item.label === "Home" ? "text-[var(--logo-gold)] after:absolute after:bottom-[56px] after:left-1/2 after:h-[2px] after:w-[41px] after:-translate-x-1/2 after:bg-[var(--logo-gold)]" : "text-white"}`}
-                href={item.href} key={item.label}
+                key={item.label}
+                href={item.href}
+                className={`relative flex h-full items-center transition hover:text-[var(--logo-gold)] ${item.label === "Home" ? "text-[var(--logo-gold)] after:absolute after:bottom-[52px] after:left-1/2 after:h-[2px] after:w-[41px] after:-translate-x-1/2 after:bg-[var(--logo-gold)]" : "text-white"}`}
               >{item.label}</a>
             ))}
           </nav>
 
-          <div className="ml-auto hidden items-center gap-[26px] lg:flex">
-            <a className="flex items-center gap-[13px] text-[15px] font-bold tracking-[0.02em]" href="tel:+19163132237">
-              <Phone className="h-[18px] w-[18px] text-[var(--logo-gold)]" strokeWidth={3} />
+          {/* Phone + CTA */}
+          <div className="flex shrink-0 items-center gap-[22px]">
+            <a className="flex items-center gap-[10px] text-[15px] font-bold tracking-[0.02em]" href="tel:+19163132237">
+              <Phone className="h-[17px] w-[17px] text-[var(--logo-gold)]" strokeWidth={3} />
               <span>(916) 313-2237</span>
             </a>
-            <a className="gold-outline-button flex h-[48px] w-[215px] items-center justify-center gap-[10px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.085em] transition" href="#estimate">
-              Get a Free Estimate <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} />
-            </a>
-          </div>
-
-          {/* Hamburger — visible below md */}
-          <button
-            className="ml-auto grid h-10 w-10 place-items-center rounded-[3px] border border-white/20 md:hidden"
-            onClick={() => setMenuOpen(o => !o)} type="button" aria-label="Toggle menu"
-          >
-            {menuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </button>
-        </div>
-
-        {/* Mobile dropdown */}
-        {menuOpen && (
-          <nav className="border-t border-white/10 bg-[var(--logo-black)] px-5 pb-5 md:hidden">
-            {navItems.map((item) => (
-              <a
-                className="block py-3 text-[13px] font-black uppercase tracking-[0.07em] text-white hover:text-[var(--logo-gold)]"
-                href={item.href} key={item.label} onClick={() => setMenuOpen(false)}
-              >{item.label}</a>
-            ))}
-            <a className="mt-3 flex items-center gap-2 py-2 text-sm font-bold" href="tel:+19163132237">
-              <Phone className="h-4 w-4 text-[var(--logo-gold)]" /> (916) 313-2237
-            </a>
-            <a className="gold-outline-button mt-3 flex h-[44px] items-center justify-center gap-2 rounded-[3px] text-[12px] font-black uppercase tracking-[0.08em] transition" href="#estimate" onClick={() => setMenuOpen(false)}>
+            <a className="gold-outline-button flex h-[46px] w-[210px] shrink-0 items-center justify-center gap-[9px] rounded-[3px] text-[12px] font-black uppercase tracking-[0.085em] transition" href="#estimate">
               Get a Free Estimate <ArrowRight className="h-[13px] w-[13px]" strokeWidth={3} />
             </a>
-          </nav>
-        )}
-
+          </div>
+        </div>
         <span className="gold-hairline pointer-events-none absolute inset-x-0 bottom-0 h-px" />
       </header>
 
@@ -224,21 +193,20 @@ export default function Page() {
             <img alt="Luxury custom home exterior at dusk" className="h-full w-full object-cover object-[58%_50%]" src={heroImage} />
             <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(0,0,0,0.97)_0%,rgba(0,0,0,0.88)_20%,rgba(0,0,0,0.56)_43%,rgba(0,0,0,0.18)_69%,rgba(0,0,0,0.24)_100%)]" />
             <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.15)_0%,rgba(0,0,0,0)_48%,rgba(0,0,0,0.58)_100%)]" />
-            <div className="absolute inset-x-0 top-0 h-[2px] bg-[linear-gradient(90deg,transparent,rgba(255,240,188,0.34),transparent)]" />
           </div>
-          <div className="relative mx-auto grid min-h-[585px] max-w-[1584px] items-center gap-10 px-5 py-10 lg:grid-cols-[minmax(0,1fr)_389px] lg:py-0 2xl:px-0">
+          <div className="relative mx-auto grid min-h-[585px] max-w-[1584px] items-center gap-10 px-10 py-10 lg:grid-cols-[minmax(0,1fr)_389px] lg:py-0">
             <div className="max-w-[610px] pt-1">
               <p className="gold-metal-text mb-[19px] text-[20px] font-black uppercase leading-none tracking-[0.19em]">Built on Trust.</p>
-              <h1 className="text-[49px] font-black uppercase leading-[1.02] tracking-[0.025em] text-white sm:text-[64px] xl:text-[74px]">Built for<br />Generations.</h1>
+              <h1 className="text-[74px] font-black uppercase leading-[1.02] tracking-[0.025em] text-white">Built for<br />Generations.</h1>
               <div className="gold-metal-bg mb-[17px] mt-[20px] h-[3px] w-[73px]" />
-              <p className="mb-[36px] max-w-[590px] text-[18px] font-medium leading-[1.78] text-white md:text-[20px]">
+              <p className="mb-[36px] max-w-[590px] text-[20px] font-medium leading-[1.78] text-white">
                 Kazemi Construction LLC is a full-service general contractor delivering quality craftsmanship and reliable solutions for your home or business.
               </p>
-              <div className="flex flex-col gap-[29px] sm:flex-row">
-                <a className="gold-outline-button flex h-[48px] w-full items-center justify-center gap-[12px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.075em] transition sm:w-[182px]" href="#services">
+              <div className="flex gap-[20px]">
+                <a className="gold-outline-button flex h-[48px] w-[182px] items-center justify-center gap-[12px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.075em] transition" href="#services">
                   Our Services <ArrowRight className="h-[15px] w-[15px]" strokeWidth={3} />
                 </a>
-                <a className="gold-outline-button flex h-[48px] w-full items-center justify-center gap-[10px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.075em] transition sm:w-[212px]" href="#estimate">
+                <a className="gold-outline-button flex h-[48px] w-[212px] items-center justify-center gap-[10px] rounded-[3px] text-[13px] font-black uppercase tracking-[0.075em] transition" href="#estimate">
                   Get a Free Estimate <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} />
                 </a>
               </div>
@@ -251,16 +219,16 @@ export default function Page() {
           </div>
         </section>
 
-        <section className="min-h-[118px] border-y border-white/5 bg-[linear-gradient(90deg,#080909_0%,#171816_48%,#0a0b0a_100%)] shadow-[inset_0_1px_0_rgba(255,240,188,0.08)]">
-          <div className="mx-auto grid min-h-[118px] max-w-[1584px] gap-y-6 px-5 py-[23px] md:grid-cols-2 lg:grid-cols-4 lg:py-0 2xl:px-0">
+        <section className="border-y border-white/5 bg-[linear-gradient(90deg,#080909_0%,#171816_48%,#0a0b0a_100%)]">
+          <div className="mx-auto grid min-h-[118px] max-w-[1584px] grid-cols-4 px-10 py-0">
             {trustItems.map((item, index) => {
               const Icon = item.icon;
               return (
-                <div className={`flex items-center gap-[27px] ${index === 0 ? "" : "lg:border-l lg:border-white/10 lg:pl-[57px]"}`} key={item.title}>
+                <div className={`flex items-center gap-[27px] py-6 ${index !== 0 ? "border-l border-white/10 pl-[57px]" : ""}`} key={item.title}>
                   <div className="gold-outline-medallion grid h-[54px] w-[54px] shrink-0 place-items-center rounded-full">
                     <Icon className="h-[30px] w-[30px] text-[var(--logo-gold-light)]" strokeWidth={1.75} />
                   </div>
-                  <div className="max-w-[245px]">
+                  <div>
                     <h3 className="mb-[7px] text-[14px] font-black uppercase leading-none tracking-[0.055em]">{item.title}</h3>
                     <p className="text-[14px] font-medium leading-[1.55] text-white">{item.text}</p>
                   </div>
@@ -270,17 +238,17 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="services" className="bg-[#f8f7f2] pb-[12px] pt-[22px] text-[#151515]">
-          <div className="mx-auto max-w-[1584px] px-5 2xl:px-0">
+        <section id="services" className="bg-[#f8f7f2] pb-[30px] pt-[40px] text-[#151515]">
+          <div className="mx-auto max-w-[1584px] px-10">
             <div className="text-center">
-              <h2 className="text-[26px] font-black uppercase leading-none tracking-[0.07em] md:text-[28px]">Our Services</h2>
+              <h2 className="text-[28px] font-black uppercase leading-none tracking-[0.07em]">Our Services</h2>
               <div className="gold-metal-bg mx-auto mt-[12px] h-[3px] w-[35px]" />
             </div>
-            <div className="mt-[22px] grid gap-[25px] md:grid-cols-2 lg:grid-cols-5">
+            <div className="mt-[30px] grid grid-cols-5 gap-[25px]">
               {services.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <article className="luxury-card group min-h-[250px] overflow-hidden rounded-[4px] shadow-[0_7px_18px_rgba(19,18,15,0.09)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(19,18,15,0.14)]" key={service.title}>
+                  <article className="luxury-card overflow-hidden rounded-[4px] shadow-[0_7px_18px_rgba(19,18,15,0.09)] transition duration-300 hover:-translate-y-0.5 hover:shadow-[0_14px_28px_rgba(19,18,15,0.14)]" key={service.title}>
                     <div className="relative h-[141px]">
                       <img alt={service.title} className="h-full w-full object-cover" src={service.image} />
                       <div className="gold-image-line absolute inset-x-0 bottom-0 h-[3px]" />
@@ -296,37 +264,37 @@ export default function Page() {
                 );
               })}
             </div>
-            <div className="mt-[17px] text-center">
-              <a className="gold-outline-button inline-flex h-[38px] w-full max-w-[260px] items-center justify-center gap-[10px] rounded-[2px] text-[12px] font-black uppercase tracking-[0.12em] transition" href="#services">
+            <div className="mt-[24px] text-center">
+              <a className="gold-outline-button inline-flex h-[38px] w-[260px] items-center justify-center gap-[10px] rounded-[2px] text-[12px] font-black uppercase tracking-[0.12em] transition" href="#services">
                 View All Services <ArrowRight className="h-[13px] w-[13px]" strokeWidth={3} />
               </a>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="bg-[#f8f7f2] pb-16 text-white">
-          <div className="mx-auto max-w-[1584px] px-5 2xl:px-0">
-            <div className="luxury-dark-panel relative min-h-[430px] overflow-hidden rounded-[4px] px-[34px] pb-[34px] pt-[28px] shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
+        <section id="projects" className="bg-[#f8f7f2] pb-16">
+          <div className="mx-auto max-w-[1584px] px-10">
+            <div className="luxury-dark-panel relative overflow-hidden rounded-[4px] px-[34px] pb-[34px] pt-[28px] shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
               <div className="absolute inset-0 opacity-[0.16] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:58px_58px]" />
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_23%_12%,rgba(255,255,255,0.12),transparent_24%),linear-gradient(90deg,rgba(0,0,0,0.1),rgba(0,0,0,0.72))]" />
-              <div className="relative mb-[26px] flex items-center justify-between gap-6">
+              <div className="relative mb-[26px] flex items-center justify-between">
                 <div>
-                  <h2 className="text-[28px] font-black uppercase leading-none tracking-[0.07em]">Recent Projects</h2>
+                  <h2 className="text-[28px] font-black uppercase leading-none tracking-[0.07em] text-white">Recent Projects</h2>
                   <div className="gold-metal-bg mt-[15px] h-[3px] w-[55px]" />
                 </div>
-                <a className="hidden items-center gap-[13px] text-[12px] font-black uppercase tracking-[0.12em] text-[var(--logo-gold)] md:flex" href="#projects">
+                <a className="flex items-center gap-[13px] text-[12px] font-black uppercase tracking-[0.12em] text-[var(--logo-gold)]" href="#projects">
                   View All Projects <ArrowRight className="h-[14px] w-[14px]" strokeWidth={3} />
                 </a>
               </div>
-              <div className="relative grid gap-[24px] md:grid-cols-3">
+              <div className="relative grid grid-cols-3 gap-[24px]">
                 {projects.map((project) => (
-                  <article className="overflow-hidden rounded-[4px] bg-white/8 shadow-[0_12px_26px_rgba(0,0,0,0.18)] ring-1 ring-[rgba(255,240,188,0.18)]" key={project.title}>
+                  <article className="overflow-hidden rounded-[4px] shadow-[0_12px_26px_rgba(0,0,0,0.18)] ring-1 ring-[rgba(255,240,188,0.18)]" key={project.title}>
                     <div className="relative">
                       <img alt={project.title} className="h-[195px] w-full object-cover" src={project.image} />
                       <div className="gold-image-line absolute inset-x-0 bottom-0 h-[3px]" />
                     </div>
-                    <div className="px-5 py-4">
-                      <h3 className="text-[17px] font-black uppercase tracking-[0.045em]">{project.title}</h3>
+                    <div className="bg-white/5 px-5 py-4">
+                      <h3 className="text-[17px] font-black uppercase tracking-[0.045em] text-white">{project.title}</h3>
                       <p className="mt-2 text-[13px] leading-6 text-white/75">Premium materials, clean detailing, and reliable project management.</p>
                     </div>
                   </article>
@@ -336,26 +304,26 @@ export default function Page() {
           </div>
         </section>
 
-        <section id="contact" className="bg-[var(--logo-black)] px-5 py-16 text-white 2xl:px-0">
-          <div className="luxury-dark-panel relative mx-auto grid max-w-[1584px] gap-10 overflow-hidden rounded-[4px] px-[34px] py-[34px] shadow-[0_18px_40px_rgba(0,0,0,0.2)] md:grid-cols-[minmax(0,1fr)_420px]">
+        <section id="contact" className="bg-[var(--logo-black)] px-10 py-16 text-white">
+          <div className="luxury-dark-panel relative mx-auto grid max-w-[1584px] grid-cols-[minmax(0,1fr)_420px] gap-10 overflow-hidden rounded-[4px] px-[34px] py-[34px] shadow-[0_18px_40px_rgba(0,0,0,0.2)]">
             <div className="absolute inset-0 opacity-[0.12] [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)] [background-size:58px_58px]" />
             <div className="relative">
               <p className="gold-metal-text mb-[13px] text-[15px] font-black uppercase leading-none tracking-[0.19em]">Ready to Build?</p>
-              <h2 className="text-[28px] font-black uppercase leading-[1.12] tracking-[0.07em] md:text-[36px]">Contact Kazemi Construction</h2>
+              <h2 className="text-[36px] font-black uppercase leading-[1.12] tracking-[0.07em]">Contact Kazemi Construction</h2>
               <div className="gold-metal-bg mb-[23px] mt-[15px] h-[3px] w-[55px]" />
-              <p className="max-w-[620px] text-[16px] font-medium leading-[1.8] text-white/75 md:text-[18px]">
+              <p className="max-w-[620px] text-[18px] font-medium leading-[1.8] text-white/75">
                 Tell us what you need built, remodeled, or repaired. We&apos;ll review the project details and follow up with a clear next step.
               </p>
-              <div className="mt-8 grid gap-4 text-[15px] font-bold tracking-[0.02em] text-white md:grid-cols-2">
-                <a className="gold-outline-button flex h-[52px] items-center gap-[13px] rounded-[3px] px-5 transition" href="tel:+19163132237">
+              <div className="mt-8 flex gap-4">
+                <a className="gold-outline-button flex h-[52px] items-center gap-[13px] rounded-[3px] px-5 transition text-[15px] font-bold" href="tel:+19163132237">
                   <Phone className="h-[18px] w-[18px]" strokeWidth={3} /> <span>(916) 313-2237</span>
                 </a>
-                <a className="gold-outline-button flex h-[52px] items-center gap-[13px] rounded-[3px] px-5 transition" href="mailto:info@kazemiconstructionllc.com">
+                <a className="gold-outline-button flex h-[52px] items-center gap-[13px] rounded-[3px] px-5 transition text-[15px] font-bold" href="mailto:info@kazemiconstructionllc.com">
                   <Mail className="h-[18px] w-[18px]" strokeWidth={3} /> <span>info@kazemiconstructionllc.com</span>
                 </a>
               </div>
             </div>
-            <div className="relative rounded-[4px] border border-[rgba(255,240,188,0.18)] bg-white/8 p-6 shadow-[0_12px_26px_rgba(0,0,0,0.18)]">
+            <div className="relative rounded-[4px] border border-[rgba(255,240,188,0.18)] bg-white/5 p-6">
               <h3 className="mb-5 text-[21px] font-black uppercase leading-none tracking-[0.045em]">Request a Callback</h3>
               <CallbackForm />
             </div>
