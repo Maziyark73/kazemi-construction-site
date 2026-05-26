@@ -4,26 +4,10 @@ import { ArrowRight, Award, CheckCircle, Clock3, Handshake, ShieldCheck, Target,
 import Header from "@/components/Header";
 
 const values = [
-  {
-    icon: ShieldCheck,
-    title: "Integrity First",
-    description: "We believe in honest communication, transparent pricing, and doing what we say we'll do. No surprises, no hidden costs."
-  },
-  {
-    icon: Award,
-    title: "Quality Craftsmanship",
-    description: "Every project reflects our commitment to excellence. We use premium materials and proven techniques that stand the test of time."
-  },
-  {
-    icon: Handshake,
-    title: "Client Partnership",
-    description: "Your vision drives our work. We listen carefully, communicate clearly, and treat your home with the same respect we'd give our own."
-  },
-  {
-    icon: Clock3,
-    title: "Reliability",
-    description: "We show up when we say we will, keep our promises, and finish projects on schedule. Your time matters to us."
-  },
+  { icon: ShieldCheck, title: "Integrity First", description: "We believe in honest communication, transparent pricing, and doing what we say we'll do. No surprises, no hidden costs." },
+  { icon: Award, title: "Quality Craftsmanship", description: "Every project reflects our commitment to excellence. We use premium materials and proven techniques that stand the test of time." },
+  { icon: Handshake, title: "Client Partnership", description: "Your vision drives our work. We listen carefully, communicate clearly, and treat your home with the same respect we'd give our own." },
+  { icon: Clock3, title: "Reliability", description: "We show up when we say we will, keep our promises, and finish projects on schedule. Your time matters to us." },
 ];
 
 const whyChooseUs = [
@@ -39,9 +23,7 @@ export default function AboutPage() {
   return (
     <div style={{ minWidth: "1100px" }} className="bg-[var(--logo-black)] text-white">
       <Header />
-
       <main>
-        {/* Hero Section */}
         <section className="bg-[var(--logo-black)] px-10 py-16">
           <div className="mx-auto max-w-[1584px]">
             <div className="grid grid-cols-[minmax(0,1fr)_480px] gap-16 items-center">
@@ -49,20 +31,12 @@ export default function AboutPage() {
                 <p className="gold-metal-text mb-[13px] text-[15px] font-black uppercase leading-none tracking-[0.19em]">Who We Are</p>
                 <h1 className="text-[48px] font-black uppercase leading-[1.1] tracking-[0.04em]">About Kazemi Construction</h1>
                 <div className="gold-metal-bg mt-[18px] h-[3px] w-[55px]" />
-                <p className="mt-8 text-[18px] font-medium leading-[1.9] text-white/80">
-                  Kazemi Construction LLC is a family-owned general contracting company serving the Sacramento area. We specialize in residential remodeling, renovations, and custom builds — delivering quality workmanship with integrity and care.
-                </p>
-                <p className="mt-6 text-[18px] font-medium leading-[1.9] text-white/80">
-                  Founded on the principle that every homeowner deserves a contractor they can trust, we&apos;ve built our reputation one project at a time. From kitchen remodels to whole-home renovations, we bring the same level of dedication and attention to detail to every job.
-                </p>
+                <p className="mt-8 text-[18px] font-medium leading-[1.9] text-white/80">Kazemi Construction LLC is a family-owned general contracting company serving the Sacramento area. We specialize in residential remodeling, renovations, and custom builds — delivering quality workmanship with integrity and care.</p>
+                <p className="mt-6 text-[18px] font-medium leading-[1.9] text-white/80">Founded on the principle that every homeowner deserves a contractor they can trust, we&apos;ve built our reputation one project at a time. From kitchen remodels to whole-home renovations, we bring the same level of dedication and attention to detail to every job.</p>
               </div>
               <div className="relative">
-                <div className="luxury-dark-panel overflow-hidden rounded-[4px] p-2 shadow-[0_18px_40px_rgba(0,0,0,0.3)]">
-                  <img
-                    alt="Construction craftsmanship"
-                    className="h-[380px] w-full rounded-[2px] object-cover"
-                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80"
-                  />
+                <div className="relative luxury-dark-panel overflow-hidden rounded-[4px] p-2 shadow-[0_18px_40px_rgba(0,0,0,0.3)]">
+                  <img alt="Construction craftsmanship" className="h-[380px] w-full rounded-[2px] object-cover" src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=900&q=80" />
                   <div className="gold-image-line absolute bottom-2 left-2 right-2 h-[3px]" />
                 </div>
               </div>
@@ -70,7 +44,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Mission Section */}
         <section className="bg-[#f8f7f2] px-10 py-16 text-[#151515]">
           <div className="mx-auto max-w-[1584px]">
             <div className="luxury-card rounded-[4px] px-16 py-14 text-center shadow-[0_10px_30px_rgba(19,18,15,0.1)]">
@@ -79,14 +52,11 @@ export default function AboutPage() {
               </div>
               <h2 className="text-[32px] font-black uppercase leading-none tracking-[0.04em]">Our Mission</h2>
               <div className="gold-metal-bg mx-auto mt-[15px] h-[3px] w-[45px]" />
-              <p className="mx-auto mt-8 max-w-[800px] text-[19px] font-medium leading-[1.85] text-[#404040]">
-                To transform houses into homes through exceptional craftsmanship, honest service, and genuine care for our clients. We don&apos;t just build and renovate — we create spaces where families thrive and memories are made.
-              </p>
+              <p className="mx-auto mt-8 max-w-[800px] text-[19px] font-medium leading-[1.85] text-[#404040]">To transform houses into homes through exceptional craftsmanship, honest service, and genuine care for our clients. We don&apos;t just build and renovate — we create spaces where families thrive and memories are made.</p>
             </div>
           </div>
         </section>
 
-        {/* Values Section */}
         <section className="bg-[var(--logo-black)] px-10 py-16">
           <div className="mx-auto max-w-[1584px]">
             <div className="text-center">
@@ -111,7 +81,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Why Choose Us */}
         <section className="bg-[#f8f7f2] px-10 py-16 text-[#151515]">
           <div className="mx-auto max-w-[1584px]">
             <div className="grid grid-cols-2 gap-16 items-center">
@@ -128,19 +97,14 @@ export default function AboutPage() {
                   ))}
                 </div>
               </div>
-              <div className="luxury-dark-panel overflow-hidden rounded-[4px] p-2 shadow-[0_18px_40px_rgba(0,0,0,0.15)]">
-                <img
-                  alt="Professional construction team"
-                  className="h-[400px] w-full rounded-[2px] object-cover"
-                  src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80"
-                />
+              <div className="relative luxury-dark-panel overflow-hidden rounded-[4px] p-2 shadow-[0_18px_40px_rgba(0,0,0,0.15)]">
+                <img alt="Professional construction team" className="h-[400px] w-full rounded-[2px] object-cover" src="https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=900&q=80" />
                 <div className="gold-image-line absolute bottom-2 left-2 right-2 h-[3px]" />
               </div>
             </div>
           </div>
         </section>
 
-        {/* CTA Section */}
         <section className="bg-[var(--logo-black)] px-10 py-16">
           <div className="mx-auto max-w-[1584px]">
             <div className="luxury-dark-panel relative overflow-hidden rounded-[4px] px-[50px] py-[50px] text-center shadow-[0_18px_40px_rgba(0,0,0,0.18)]">
@@ -149,13 +113,8 @@ export default function AboutPage() {
                 <p className="gold-metal-text mb-[13px] text-[15px] font-black uppercase leading-none tracking-[0.19em]">Let&apos;s Work Together</p>
                 <h2 className="text-[36px] font-black uppercase leading-[1.12] tracking-[0.04em] text-white">Ready to Start Your Project?</h2>
                 <div className="gold-metal-bg mx-auto mb-[23px] mt-[15px] h-[3px] w-[55px]" />
-                <p className="mx-auto max-w-[600px] text-[17px] font-medium leading-[1.8] text-white/75">
-                  Contact us today to discuss your project. We&apos;ll listen to your needs, answer your questions, and provide a free estimate.
-                </p>
-                <Link
-                  href="/contact"
-                  className="gold-outline-button mt-8 inline-flex h-[52px] items-center justify-center gap-[12px] rounded-[3px] px-8 text-[14px] font-black uppercase tracking-[0.08em] transition"
-                >
+                <p className="mx-auto max-w-[600px] text-[17px] font-medium leading-[1.8] text-white/75">Contact us today to discuss your project. We&apos;ll listen to your needs, answer your questions, and provide a free estimate.</p>
+                <Link href="/contact" className="gold-outline-button mt-8 inline-flex h-[52px] items-center justify-center gap-[12px] rounded-[3px] px-8 text-[14px] font-black uppercase tracking-[0.08em] transition">
                   Contact Us <ArrowRight className="h-[15px] w-[15px]" strokeWidth={3} />
                 </Link>
               </div>
