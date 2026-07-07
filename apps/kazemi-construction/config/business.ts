@@ -1,0 +1,31 @@
+import type { BusinessConfig } from "@/packages/website-engine/config/types";
+
+export const business: BusinessConfig = {
+  companyName: "Kazemi Construction LLC",
+  tagline: "Kitchen remodels, baths, additions, ADUs, and repair work for Sacramento-area homes.",
+  city: "Sacramento",
+  serviceAreas: [
+    "Sacramento",
+    "East Sacramento",
+    "Land Park",
+    "Midtown",
+    "Natomas",
+    "Roseville",
+    "Elk Grove",
+    "Folsom",
+    "Citrus Heights",
+    "Rancho Cordova",
+    "Carmichael",
+    "Fair Oaks",
+  ],
+  phone: "(916) 313-2237",
+  email: "info@kazemiconstructionllc.com",
+  address: "Sacramento, CA",
+  logo: "/logo.png",
+  reviewsCount: 87,
+  averageRating: 5.0,
+  yearsInBusiness: 10,
+  licenseInfo: "Licensed and insured in California",
+  financingAvailable: true,
+  emergencyService: false,
+};
