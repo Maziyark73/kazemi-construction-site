@@ -18,7 +18,7 @@ export const business: BusinessConfig = {
     "Carmichael",
     "Fair Oaks",
   ],
-  phone: "(916) 313-2237",
+  phone: "(916) 837-5508",
   email: "info@kazemiconstructionllc.com",
   address: "Sacramento, CA",
   logo: "/logo.png",
